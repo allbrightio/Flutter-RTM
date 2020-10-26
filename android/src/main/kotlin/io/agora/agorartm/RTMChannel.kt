@@ -1,10 +1,7 @@
 package io.agora.agorartm
 
 import android.os.Handler
-import io.agora.rtm.RtmChannelAttribute
-import io.agora.rtm.RtmChannelListener
-import io.agora.rtm.RtmChannelMember
-import io.agora.rtm.RtmMessage
+import io.agora.rtm.*
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
 
@@ -44,6 +41,16 @@ class RTMChannel : RtmChannelListener, EventChannel.StreamHandler {
         sendChannelEvent("onAttributesUpdated", hashMapOf(
                 "attributes" to attributeList
         ))
+    }
+
+    override fun onFileMessageReceived(message: RtmFileMessage, p1: RtmChannelMember?) {
+        // TODO not supported yet
+        // sendChannelEvent("onFileMessageReceived", hashMapOf())
+    }
+
+    override fun onImageMessageReceived(message: RtmImageMessage, p1: RtmChannelMember?) {
+        // TODO not supported yet
+        // sendChannelEvent("onImageMessageReceived", hashMapOf())
     }
 
     override
