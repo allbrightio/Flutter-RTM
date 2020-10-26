@@ -81,19 +81,19 @@
   [self sendClientEvent:@"onTokenExpired" params:@{}];
 }
 
-- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit imageMessageReceived:(AgoraRtmImageMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
+- (void)rtmKit:(AgoraRtmKit *)kit imageMessageReceived:(AgoraRtmImageMessage *)message fromPeer:(NSString *)peerId {
     // TODO
 }
 
-- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit fileMessageReceived:(AgoraRtmFileMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
+- (void)rtmKit:(AgoraRtmKit *)kit fileMessageReceived:(AgoraRtmFileMessage *)message fromPeer:(NSString *)peerId {
     // TODO
 }
 
-- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit media:(long long)requestId uploadingProgress:(AgoraRtmMediaOperationProgress * _Nonnull)progress {
+- (void)rtmKit:(AgoraRtmKit *)kit media:(long long)requestId uploadingProgress:(AgoraRtmMediaOperationProgress *)progress {
     // TODO
 }
 
-- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit media:(long long)requestId downloadingProgress:(AgoraRtmMediaOperationProgress * _Nonnull)progress {
+- (void)rtmKit:(AgoraRtmKit *)kit media:(long long)requestId downloadingProgress:(AgoraRtmMediaOperationProgress *)progress {
     // TODO
 }
 

@@ -93,4 +93,12 @@
     [self sendChannelEvent:@"onMemberCountUpdated" params:@{@"count": [NSNumber numberWithInt:count]}];
 }
 
+- (void)channel:(AgoraRtmChannel *)channel fileMessageReceived:(AgoraRtmFileMessage *)message fromMember:(AgoraRtmMember *)member {
+    // TODO
+}
+
+- (void)channel:(AgoraRtmChannel *)channel imageMessageReceived:(AgoraRtmImageMessage *)message fromMember:(AgoraRtmMember *)member {
+    // TODO
+}
+
 @end
