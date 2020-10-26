@@ -81,6 +81,22 @@
   [self sendClientEvent:@"onTokenExpired" params:@{}];
 }
 
+- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit imageMessageReceived:(AgoraRtmImageMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
+    // TODO
+}
+
+- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit fileMessageReceived:(AgoraRtmFileMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
+    // TODO
+}
+
+- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit media:(long long)requestId uploadingProgress:(AgoraRtmMediaOperationProgress * _Nonnull)progress {
+    // TODO
+}
+
+- (void)rtmKit:(AgoraRtmKit * _Nonnull)kit media:(long long)requestId downloadingProgress:(AgoraRtmMediaOperationProgress * _Nonnull)progress {
+    // TODO
+}
+
 #pragma - AgoraRtmCallDelegate
 - (void)rtmCallKit:(AgoraRtmCallKit *_Nonnull)callKit localInvitationReceivedByPeer:(AgoraRtmLocalInvitation *_Nonnull)localInvitation {
   [_localInvitations setObject:localInvitation forKey:localInvitation.calleeId];

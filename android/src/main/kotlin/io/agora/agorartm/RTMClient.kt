@@ -206,10 +206,22 @@ class RTMClient : RtmClientListener, EventChannel.StreamHandler, RtmCallEventLis
                 )))
     }
 
+    override fun onImageMessageReceivedFromPeer(message: RtmImageMessage, peerId: String) {
+        // TODO not supported yet
+        // sendClientEvent("onImageMessageReceivedFromPeer", hashMapOf("peerId" to peerId))
+    }
+
+
     override fun onFileMessageReceivedFromPeer(message: RtmFileMessage, peerId: String) {
         // TODO not supported yet
         // sendClientEvent("onFileMessageReceivedFromPeer", hashMapOf())
     }
+
+    override fun onMediaUploadingProgress(progress: RtmMediaOperationProgress, p1: Long) {
+        // TODO not supported yet
+        // sendClientEvent("onMediaUploadingProgress", hashMapOf("peerId" to peerId))
+    }
+
 
     override fun onMediaDownloadingProgress(progress: RtmMediaOperationProgress, p1: Long) {
         // TODO not supported yet
@@ -234,15 +246,5 @@ class RTMClient : RtmClientListener, EventChannel.StreamHandler, RtmCallEventLis
     override
     fun onPeersOnlineStatusChanged(p0: MutableMap<String, Int>) {
 
-    }
-
-    override fun onMediaUploadingProgress(progress: RtmMediaOperationProgress, p1: Long) {
-        // TODO not supported yet
-        // sendClientEvent("onMediaUploadingProgress", hashMapOf("peerId" to peerId))
-    }
-
-    override fun onImageMessageReceivedFromPeer(message: RtmImageMessage, peerId: String) {
-        // TODO not supported yet
-        // sendClientEvent("onImageMessageReceivedFromPeer", hashMapOf("peerId" to peerId))
     }
 }
