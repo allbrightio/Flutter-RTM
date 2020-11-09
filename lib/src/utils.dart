@@ -20,6 +20,69 @@ class AgoraRtmMessage {
   }
 }
 
+class AgoraRtmImageMessage {
+  String text;
+  int ts;
+  bool offline;
+
+  AgoraRtmImageMessage(this.text, this.ts, this.offline);
+
+  AgoraRtmImageMessage.fromText(String text) : text = text;
+
+  AgoraRtmImageMessage.fromJson(Map<dynamic, dynamic> json)
+      : text = json['text'],
+        ts = json['ts'],
+        offline = json['offline'];
+
+  Map<String, dynamic> toJson() => {'text': text, 'ts': ts, 'offline': offline};
+
+  @override
+  String toString() {
+    return "{text: $text, ts: $ts, offline: $offline}";
+  }
+}
+
+class AgoraRtmFileMessage {
+  String text;
+  int ts;
+  bool offline;
+
+  AgoraRtmFileMessage(this.text, this.ts, this.offline);
+
+  AgoraRtmFileMessage.fromText(String text) : text = text;
+
+  AgoraRtmFileMessage.fromJson(Map<dynamic, dynamic> json)
+      : text = json['text'],
+        ts = json['ts'],
+        offline = json['offline'];
+
+  Map<String, dynamic> toJson() => {'text': text, 'ts': ts, 'offline': offline};
+
+  @override
+  String toString() {
+    return "{text: $text, ts: $ts, offline: $offline}";
+  }
+}
+
+class AgoraRtmMediaOperationProgress {
+  int currentSize;
+  int totalSize;
+
+  AgoraRtmMediaOperationProgress(this.currentSize, this.totalSize);
+
+  AgoraRtmMediaOperationProgress.fromJson(Map<dynamic, dynamic> json)
+      : currentSize = json['currentSize'],
+        totalSize = json['totalSize'];
+
+  Map<String, dynamic> toJson() =>
+      {'currentSize': currentSize, 'totalSize': totalSize};
+
+  @override
+  String toString() {
+    return "{currentSize: $currentSize, totalSize: $totalSize}";
+  }
+}
+
 class AgoraRtmMember {
   String userId;
   String channelId;
