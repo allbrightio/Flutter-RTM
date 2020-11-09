@@ -64,10 +64,12 @@ class AgoraRtmClient {
       onFileMessageReceived;
 
   /// Occurs when channel media uploading progress changed.
-  void Function(int currentSize, int totalSize) onMediaUploadingProgress;
+  void Function(int currentSize, int totalSize, int requestId)
+      onMediaUploadingProgress;
 
   /// Occurs when channel media downloading progress changed.
-  void Function(int currentSize, int totalSize) onMediaDownloadingProgress;
+  void Function(int currentSize, int totalSize, int requestId)
+      onMediaDownloadingProgress;
 
   /// Occurs when your token expires.
   void Function() onTokenExpired;
@@ -132,27 +134,31 @@ class AgoraRtmClient {
         String peerId = map["peerId"];
         this?.onMessageReceived?.call(message, peerId);
         break;
-      case 'onImageMessageReceivedFromPeer':
+      case 'onImageMessageReceived':
         final message = AgoraRtmImageMessage.fromJson(map['message']);
         String peerId = map["peerId"];
         this?.onImageMessageReceived?.call(message, peerId);
         break;
-      case 'onFileMessageReceivedFromPeer':
+      case 'onFileMessageReceived':
         final message = AgoraRtmFileMessage.fromJson(map['message']);
         String peerId = map["peerId"];
         this?.onFileMessageReceived?.call(message, peerId);
         break;
       case 'onMediaUploadingProgress':
-        final progress = AgoraRtmMediaOperationProgress.fromJson(map);
+        final progress =
+            AgoraRtmMediaOperationProgress.fromJson(map['message']);
+        int requestId = map["requestId"];
         this
             ?.onMediaUploadingProgress
-            ?.call(progress.currentSize, progress.totalSize);
+            ?.call(progress.currentSize, progress.totalSize, requestId);
         break;
       case 'onMediaDownloadingProgress':
-        final progress = AgoraRtmMediaOperationProgress.fromJson(map);
+        final progress =
+            AgoraRtmMediaOperationProgress.fromJson(map['message']);
+        int requestId = map["requestId"];
         this
             ?.onMediaDownloadingProgress
-            ?.call(progress.currentSize, progress.totalSize);
+            ?.call(progress.currentSize, progress.totalSize, requestId);
         break;
       case 'onTokenExpired':
         this?.onTokenExpired?.call();

@@ -82,19 +82,43 @@
 }
 
 - (void)rtmKit:(AgoraRtmKit *)kit imageMessageReceived:(AgoraRtmImageMessage *)message fromPeer:(NSString *)peerId {
-    // TODO
+    [self sendClientEvent:@"onImageMessageReceived" params: @{
+                   @"message": @{@"text":message.text,
+                                 @"ts": @(message.serverReceivedTs),
+                                 @"offline": @(message.isOfflineMessage),
+                                 @"size": @(message.size),
+                                 @"thumbnail": message.thumbnail,
+                                 @"fileName": message.fileName,
+                                 @"width": @(message.width),
+                                 @"height": @(message.height),
+                                 @"thumbnailWidth": @(message.thumbnailWidth),
+                                 @"thumbnailHeight": @(message.thumbnailHeight)
+                                 },@"peerId": peerId}];
 }
 
 - (void)rtmKit:(AgoraRtmKit *)kit fileMessageReceived:(AgoraRtmFileMessage *)message fromPeer:(NSString *)peerId {
-    // TODO
+    [self sendClientEvent:@"onFileMessageReceived" params: @{
+                   @"message": @{@"text":message.text,
+                                 @"ts": @(message.serverReceivedTs),
+                                 @"offline": @(message.isOfflineMessage),
+                                 @"size": @(message.size),
+                                 @"thumbnail": message.thumbnail,
+                                 @"fileName": message.fileName
+                                 },@"peerId": peerId}];
 }
 
 - (void)rtmKit:(AgoraRtmKit *)kit media:(long long)requestId uploadingProgress:(AgoraRtmMediaOperationProgress *)progress {
-    // TODO
+    [self sendClientEvent:@"onMediaUploadingProgress" params: @{
+                   @"message": @{@"currentSize":@(progress.currentSize),
+                                 @"totalSize": @(progress.totalSize),
+                                 },@"requestId": @(requestId)}];
 }
 
 - (void)rtmKit:(AgoraRtmKit *)kit media:(long long)requestId downloadingProgress:(AgoraRtmMediaOperationProgress *)progress {
-    // TODO
+    [self sendClientEvent:@"onMediaDownloadingProgress" params: @{
+                   @"message": @{@"currentSize":@(progress.currentSize),
+                                 @"totalSize": @(progress.totalSize),
+                                 },@"requestId": @(requestId)}];
 }
 
 #pragma - AgoraRtmCallDelegate

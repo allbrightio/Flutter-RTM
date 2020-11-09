@@ -94,11 +94,33 @@
 }
 
 - (void)channel:(AgoraRtmChannel *)channel fileMessageReceived:(AgoraRtmFileMessage *)message fromMember:(AgoraRtmMember *)member {
-    // TODO
+    [self sendChannelEvent:@"onFileMessageReceived" params:@{@"userId": member.userId,
+             @"channelId": member.channelId,
+             @"message":
+                @{@"text":message.text,
+                  @"ts": @(message.serverReceivedTs),
+                  @"offline": @(message.isOfflineMessage),
+                  @"size": @(message.size),
+                  @"thumbnail": message.thumbnail,
+                  @"fileName": message.fileName}
+                                               }];
 }
 
 - (void)channel:(AgoraRtmChannel *)channel imageMessageReceived:(AgoraRtmImageMessage *)message fromMember:(AgoraRtmMember *)member {
-    // TODO
+    [self sendChannelEvent:@"onImageMessageReceived" params:@{@"userId": member.userId,
+             @"channelId": member.channelId,
+              @"message":
+                 @{@"text":message.text,
+                   @"ts": @(message.serverReceivedTs),
+                   @"offline": @(message.isOfflineMessage),
+                   @"size": @(message.size),
+                   @"thumbnail": message.thumbnail,
+                   @"fileName": message.fileName,
+                   @"width": @(message.width),
+                   @"height": @(message.height),
+                   @"thumbnailWidth": @(message.thumbnailWidth),
+                   @"thumbnailHeight": @(message.thumbnailHeight)}
+                                                }];
 }
 
 @end
