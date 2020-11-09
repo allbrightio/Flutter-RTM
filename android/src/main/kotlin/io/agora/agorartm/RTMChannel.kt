@@ -43,14 +43,40 @@ class RTMChannel : RtmChannelListener, EventChannel.StreamHandler {
         ))
     }
 
-    override fun onFileMessageReceived(message: RtmFileMessage, p1: RtmChannelMember?) {
-        // TODO not supported yet
-        // sendChannelEvent("onFileMessageReceived", hashMapOf())
+    override fun onFileMessageReceived(message: RtmFileMessage, member: RtmChannelMember) {
+        sendChannelEvent("onFileMessageReceived", hashMapOf(
+                "userId" to member.userId,
+                "channelId" to member.channelId,
+                "message" to hashMapOf(
+                        "text" to message.text,
+                        "offline" to message.isOfflineMessage,
+                        "ts" to message.serverReceivedTs,
+                        "size" to message.size,
+                        "mediaId" to message.mediaId,
+                        "thumbnail" to message.thumbnail,
+                        "fileName" to message.fileName
+                )
+        ))
     }
 
-    override fun onImageMessageReceived(message: RtmImageMessage, p1: RtmChannelMember?) {
-        // TODO not supported yet
-        // sendChannelEvent("onImageMessageReceived", hashMapOf())
+    override fun onImageMessageReceived(message: RtmImageMessage, member: RtmChannelMember) {
+        sendChannelEvent("onImageMessageReceived", hashMapOf(
+                "userId" to member.userId,
+                "channelId" to member.channelId,
+                "message" to hashMapOf(
+                        "text" to message.text,
+                        "offline" to message.isOfflineMessage,
+                        "ts" to message.serverReceivedTs,
+                        "size" to message.size,
+                        "mediaId" to message.mediaId,
+                        "thumbnail" to message.thumbnail,
+                        "fileName" to message.fileName,
+                        "width" to message.width,
+                        "height" to message.height,
+                        "thumbnailWidth" to message.thumbnailWidth,
+                        "thumbnailHeight" to message.thumbnailHeight
+                )
+        ))
     }
 
     override
