@@ -207,7 +207,7 @@ class RTMClient : RtmClientListener, EventChannel.StreamHandler, RtmCallEventLis
     }
 
     override fun onImageMessageReceivedFromPeer(message: RtmImageMessage, peerId: String) {
-        sendClientEvent("onImageMessageReceivedFromPeer", hashMapOf("peerId" to peerId,
+        sendClientEvent("onImageMessageReceived", hashMapOf("peerId" to peerId,
                 "message" to hashMapOf(
                         "text" to message.text,
                         "offline" to message.isOfflineMessage,
@@ -225,7 +225,7 @@ class RTMClient : RtmClientListener, EventChannel.StreamHandler, RtmCallEventLis
 
 
     override fun onFileMessageReceivedFromPeer(message: RtmFileMessage, peerId: String) {
-        sendClientEvent("onFileMessageReceivedFromPeer", hashMapOf("peerId" to peerId,
+        sendClientEvent("onFileMessageReceived", hashMapOf("peerId" to peerId,
                 "message" to hashMapOf(
                         "text" to message.text,
                         "offline" to message.isOfflineMessage,

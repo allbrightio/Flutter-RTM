@@ -133,6 +133,32 @@ class AgoraRtmChannel {
           "sendMessage failed errorCode:${res['errorCode']}", res['errorCode']);
   }
 
+  Future<void> sendFileMessage(AgoraRtmFileMessage message,
+      [bool offline, bool historical]) async {
+    final res = await _callNative("sendFileMessage", {
+      'message': message.text,
+      "mediaId": message.mediaId,
+      "offline": offline,
+      "historical": historical
+    });
+    if (res["errorCode"] != 0)
+      throw AgoraRtmChannelException(
+          "sendMessage failed errorCode:${res['errorCode']}", res['errorCode']);
+  }
+
+  Future<void> sendImageMessage(AgoraRtmImageMessage message,
+      [bool offline, bool historical]) async {
+    final res = await _callNative("sendImageMessage", {
+      'message': message.text,
+      "mediaId": message.mediaId,
+      "offline": offline,
+      "historical": historical
+    });
+    if (res["errorCode"] != 0)
+      throw AgoraRtmChannelException(
+          "sendMessage failed errorCode:${res['errorCode']}", res['errorCode']);
+  }
+
   Future<void> leave() async {
     final res = await _callNative("leave", null);
     if (res["errorCode"] != 0)

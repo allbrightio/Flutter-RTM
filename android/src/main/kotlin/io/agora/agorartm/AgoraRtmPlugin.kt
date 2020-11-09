@@ -925,6 +925,62 @@ class AgoraRtmPlugin: MethodCallHandler {
           }
         })
       }
+      "sendFileMessage" -> {
+        // TODO verify implementation
+        val mediaId =  args?.get("message") as String;
+        val message = client.createFileMessageByMediaId(mediaId)
+        message.text = args?.get("message") as String
+        val options = SendMessageOptions().apply {
+          (args["historical"] as? Boolean)?.let {
+            enableHistoricalMessaging = it
+          }
+          (args["offline"] as? Boolean)?.let {
+            enableOfflineMessaging = it
+          }
+        }
+        rtmChannel.sendMessage(message, options, object : ResultCallback<Void> {
+          override fun onSuccess(resp: Void?) {
+            runMainThread {
+              result.success(hashMapOf(
+                      "errorCode" to 0
+              ))
+            }
+          }
+          override fun onFailure(code: ErrorInfo) {
+            runMainThread {
+              result.success(hashMapOf("errorCode" to code.getErrorCode()))
+            }
+          }
+        });
+      }
+      "sendImageMessage" -> {
+        // TODO verify implementation
+        val mediaId =  args?.get("message") as String;
+        val message = client.createImageMessageByMediaId(mediaId)
+        message.text = args?.get("message") as String
+        val options = SendMessageOptions().apply {
+          (args["historical"] as? Boolean)?.let {
+            enableHistoricalMessaging = it
+          }
+          (args["offline"] as? Boolean)?.let {
+            enableOfflineMessaging = it
+          }
+        }
+        rtmChannel.sendMessage(message, options, object : ResultCallback<Void> {
+          override fun onSuccess(resp: Void?) {
+            runMainThread {
+              result.success(hashMapOf(
+                      "errorCode" to 0
+              ))
+            }
+          }
+          override fun onFailure(code: ErrorInfo) {
+            runMainThread {
+              result.success(hashMapOf("errorCode" to code.getErrorCode()))
+            }
+          }
+        });
+      }
       "leave" -> {
         rtmChannel.leave(object : ResultCallback<Void> {
           override fun onSuccess(resp: Void?) {
