@@ -207,25 +207,51 @@ class RTMClient : RtmClientListener, EventChannel.StreamHandler, RtmCallEventLis
     }
 
     override fun onImageMessageReceivedFromPeer(message: RtmImageMessage, peerId: String) {
-        // TODO not supported yet
-        // sendClientEvent("onImageMessageReceivedFromPeer", hashMapOf("peerId" to peerId))
+        sendClientEvent("onImageMessageReceivedFromPeer", hashMapOf("peerId" to peerId,
+                "message" to hashMapOf(
+                        "text" to message.text,
+                        "offline" to message.isOfflineMessage,
+                        "ts" to message.serverReceivedTs,
+                        "size" to message.size,
+                        "mediaId" to message.mediaId,
+                        "thumbnail" to message.thumbnail,
+                        "fileName" to message.fileName,
+                        "width" to message.width,
+                        "height" to message.height,
+                        "thumbnailWidth" to message.thumbnailWidth,
+                        "thumbnailHeight" to message.thumbnailHeight
+                )))
     }
 
 
     override fun onFileMessageReceivedFromPeer(message: RtmFileMessage, peerId: String) {
-        // TODO not supported yet
-        // sendClientEvent("onFileMessageReceivedFromPeer", hashMapOf())
+        sendClientEvent("onFileMessageReceivedFromPeer", hashMapOf("peerId" to peerId,
+                "message" to hashMapOf(
+                        "text" to message.text,
+                        "offline" to message.isOfflineMessage,
+                        "ts" to message.serverReceivedTs,
+                        "size" to message.size,
+                        "mediaId" to message.mediaId,
+                        "thumbnail" to message.thumbnail,
+                        "fileName" to message.fileName
+                )))
     }
 
-    override fun onMediaUploadingProgress(progress: RtmMediaOperationProgress, p1: Long) {
-        // TODO not supported yet
-        // sendClientEvent("onMediaUploadingProgress", hashMapOf("peerId" to peerId))
+    override fun onMediaUploadingProgress(progress: RtmMediaOperationProgress, requestId: Long) {
+        sendClientEvent("onMediaUploadingProgress", hashMapOf("requestId" to requestId,
+                "message" to hashMapOf(
+                        "currentSize" to progress.currentSize,
+                        "totalSize" to progress.totalSize
+                )))
     }
 
 
-    override fun onMediaDownloadingProgress(progress: RtmMediaOperationProgress, p1: Long) {
-        // TODO not supported yet
-        // sendClientEvent("onMediaDownloadingProgress", hashMapOf())
+    override fun onMediaDownloadingProgress(progress: RtmMediaOperationProgress, requestId: Long) {
+        sendClientEvent("onMediaDownloadingProgress", hashMapOf("requestId" to requestId,
+                "message" to hashMapOf(
+                        "currentSize" to progress.currentSize,
+                        "totalSize" to progress.totalSize
+                )))
     }
 
     override
