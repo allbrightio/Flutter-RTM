@@ -27,14 +27,6 @@ class AgoraRtmChannel {
   void Function(AgoraRtmMessage message, AgoraRtmMember fromMember)
       onMessageReceived;
 
-  /// Occurs when receiving a channel image message.
-  void Function(AgoraRtmImageMessage message, AgoraRtmMember fromMember)
-      onImageMessageReceived;
-
-  /// Occurs when receiving a channel file message.
-  void Function(AgoraRtmFileMessage message, AgoraRtmMember fromMember)
-      onFileMessageReceived;
-
   /// Occurs when a user joins the channel.
   void Function(AgoraRtmMember member) onMemberJoined;
 
@@ -46,12 +38,6 @@ class AgoraRtmChannel {
 
   /// Occurs when channel member count updated.
   void Function(int count) onMemberCountUpdated;
-
-  /// Occurs when channel media uploading progress changed.
-  void Function(int currentSize, int totalSize) onMediaUploadingProgress;
-
-  /// Occurs when channel media downloading progress changed.
-  void Function(int currentSize, int totalSize) onMediaDownloadingProgress;
 
   final String channelId;
   final int _clientIndex;
@@ -72,28 +58,6 @@ class AgoraRtmChannel {
         AgoraRtmMessage message = AgoraRtmMessage.fromJson(map['message']);
         AgoraRtmMember member = AgoraRtmMember.fromJson(map);
         this?.onMessageReceived?.call(message, member);
-        break;
-      case 'onImageMessageReceivedFromPeer':
-        final message = AgoraRtmImageMessage.fromJson(map['message']);
-        AgoraRtmMember member = AgoraRtmMember.fromJson(map);
-        this?.onImageMessageReceived?.call(message, member);
-        break;
-      case 'onFileMessageReceivedFromPeer':
-        final message = AgoraRtmFileMessage.fromJson(map['message']);
-        AgoraRtmMember member = AgoraRtmMember.fromJson(map);
-        this?.onFileMessageReceived?.call(message, member);
-        break;
-      case 'onMediaUploadingProgress':
-        final progress = AgoraRtmMediaOperationProgress.fromJson(map);
-        this
-            ?.onMediaUploadingProgress
-            ?.call(progress.currentSize, progress.totalSize);
-        break;
-      case 'onMediaDownloadingProgress':
-        final progress = AgoraRtmMediaOperationProgress.fromJson(map);
-        this
-            ?.onMediaDownloadingProgress
-            ?.call(progress.currentSize, progress.totalSize);
         break;
       case 'onMemberJoined':
         AgoraRtmMember member = AgoraRtmMember.fromJson(map);

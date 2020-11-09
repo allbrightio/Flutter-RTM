@@ -55,6 +55,20 @@ class AgoraRtmClient {
   /// Occurs when the local user receives a peer-to-peer message.
   void Function(AgoraRtmMessage message, String peerId) onMessageReceived;
 
+  /// Occurs when receiving a channel image message.
+  void Function(AgoraRtmImageMessage message, String peerId)
+      onImageMessageReceived;
+
+  /// Occurs when receiving a channel file message.
+  void Function(AgoraRtmFileMessage message, String peerId)
+      onFileMessageReceived;
+
+  /// Occurs when channel media uploading progress changed.
+  void Function(int currentSize, int totalSize) onMediaUploadingProgress;
+
+  /// Occurs when channel media downloading progress changed.
+  void Function(int currentSize, int totalSize) onMediaDownloadingProgress;
+
   /// Occurs when your token expires.
   void Function() onTokenExpired;
 
@@ -117,6 +131,28 @@ class AgoraRtmClient {
         AgoraRtmMessage message = AgoraRtmMessage.fromJson(map["message"]);
         String peerId = map["peerId"];
         this?.onMessageReceived?.call(message, peerId);
+        break;
+      case 'onImageMessageReceivedFromPeer':
+        final message = AgoraRtmImageMessage.fromJson(map['message']);
+        String peerId = map["peerId"];
+        this?.onImageMessageReceived?.call(message, peerId);
+        break;
+      case 'onFileMessageReceivedFromPeer':
+        final message = AgoraRtmFileMessage.fromJson(map['message']);
+        String peerId = map["peerId"];
+        this?.onFileMessageReceived?.call(message, peerId);
+        break;
+      case 'onMediaUploadingProgress':
+        final progress = AgoraRtmMediaOperationProgress.fromJson(map);
+        this
+            ?.onMediaUploadingProgress
+            ?.call(progress.currentSize, progress.totalSize);
+        break;
+      case 'onMediaDownloadingProgress':
+        final progress = AgoraRtmMediaOperationProgress.fromJson(map);
+        this
+            ?.onMediaDownloadingProgress
+            ?.call(progress.currentSize, progress.totalSize);
         break;
       case 'onTokenExpired':
         this?.onTokenExpired?.call();
