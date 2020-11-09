@@ -24,44 +24,44 @@ class AgoraRtmImageMessage {
   String text;
   int ts;
   bool offline;
-
-  AgoraRtmImageMessage(this.text, this.ts, this.offline);
-
-  AgoraRtmImageMessage.fromText(String text) : text = text;
+  int size;
+  String mediaId;
+  dynamic thumbnail;
+  String fileName;
+  int width;
+  int height;
+  int thumbnailWidth;
+  int thumbnailHeight;
 
   AgoraRtmImageMessage.fromJson(Map<dynamic, dynamic> json)
       : text = json['text'],
         ts = json['ts'],
-        offline = json['offline'];
-
-  Map<String, dynamic> toJson() => {'text': text, 'ts': ts, 'offline': offline};
-
-  @override
-  String toString() {
-    return "{text: $text, ts: $ts, offline: $offline}";
-  }
+        offline = json['offline'],
+        size = json['size'],
+        thumbnail = json['thumbnail'],
+        fileName = json['fileName'],
+        width = json['width'],
+        height = json['height'],
+        thumbnailWidth = json['thumbnailWidth'],
+        thumbnailHeight = json['thumbnailHeight'];
 }
 
 class AgoraRtmFileMessage {
   String text;
   int ts;
   bool offline;
-
-  AgoraRtmFileMessage(this.text, this.ts, this.offline);
-
-  AgoraRtmFileMessage.fromText(String text) : text = text;
+  int size;
+  String mediaId;
+  dynamic thumbnail;
+  String fileName;
 
   AgoraRtmFileMessage.fromJson(Map<dynamic, dynamic> json)
       : text = json['text'],
         ts = json['ts'],
-        offline = json['offline'];
-
-  Map<String, dynamic> toJson() => {'text': text, 'ts': ts, 'offline': offline};
-
-  @override
-  String toString() {
-    return "{text: $text, ts: $ts, offline: $offline}";
-  }
+        offline = json['offline'],
+        size = json['size'],
+        thumbnail = json['thumbnail'],
+        fileName = json['fileName'];
 }
 
 class AgoraRtmMediaOperationProgress {

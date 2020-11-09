@@ -27,6 +27,14 @@ class AgoraRtmChannel {
   void Function(AgoraRtmMessage message, AgoraRtmMember fromMember)
       onMessageReceived;
 
+  /// Occurs when receiving a channel image message.
+  void Function(AgoraRtmImageMessage message, AgoraRtmMember fromMember)
+      onImageMessageReceived;
+
+  /// Occurs when receiving a channel file message.
+  void Function(AgoraRtmFileMessage message, AgoraRtmMember fromMember)
+      onFileMessageReceived;
+
   /// Occurs when a user joins the channel.
   void Function(AgoraRtmMember member) onMemberJoined;
 
@@ -58,6 +66,16 @@ class AgoraRtmChannel {
         AgoraRtmMessage message = AgoraRtmMessage.fromJson(map['message']);
         AgoraRtmMember member = AgoraRtmMember.fromJson(map);
         this?.onMessageReceived?.call(message, member);
+        break;
+      case 'onImageMessageReceived':
+        final message = AgoraRtmImageMessage.fromJson(map['message']);
+        AgoraRtmMember member = AgoraRtmMember.fromJson(map);
+        this?.onImageMessageReceived?.call(message, member);
+        break;
+      case 'onFileMessageReceived':
+        final message = AgoraRtmFileMessage.fromJson(map['message']);
+        AgoraRtmMember member = AgoraRtmMember.fromJson(map);
+        this?.onFileMessageReceived?.call(message, member);
         break;
       case 'onMemberJoined':
         AgoraRtmMember member = AgoraRtmMember.fromJson(map);
